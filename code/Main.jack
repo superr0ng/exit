@@ -1,0 +1,43 @@
+//Main
+
+class Main
+{
+
+    /** Initializes a new game and starts it. */    
+    function void main()
+    {
+        var Game0 game0;
+        var Game1 game1;
+        var Game2 game2;
+
+        do Screen.clearScreen();
+        do Startscreen.draw();
+
+        do Screen.clearScreen();
+        do Output.moveCursor(12, 28);
+        do Output.printString("LEVEL 0");
+        do Sys.wait(2000);
+        let game0 = Game0.new();
+        do game0.run();
+        do game0.dispose();
+
+        do Screen.clearScreen();
+        do Output.moveCursor(12, 28);
+        do Output.printString("LEVEL 1");
+        do Sys.wait(2000);
+        let game1 = Game1.new();
+        do game1.run();
+        do game1.dispose();
+
+        do Screen.clearScreen();
+        do Output.moveCursor(12, 28);
+        do Output.printString("LEVEL 2");
+        do Sys.wait(2000);
+        let game2 = Game2.new();
+        do game2.run();
+        do game2.dispose();
+        do End.draw();
+
+        return;
+    }
+}

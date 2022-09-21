@@ -1,0 +1,434 @@
+//Map2
+class Map2
+{
+    field Array map;
+    field int castleX, castleY;
+    field int sunX, sunY;
+    field int upX, upY;
+
+    constructor Map2 new()
+    {
+        var int i;
+        let castleX = 0;
+        let castleY = (4 * 16) + 15;
+        let sunX = (28 * 16);
+        let sunY = (3 * 16) + 15;
+        let upX = (28 * 16);
+        let upY = (14 * 16) + 15;
+        let map = Array.new(512);
+
+        do Screen.clearScreen();
+        
+        let i = 0;
+        while(i < (16 * 32))
+        {
+            let map[i] = 0;
+            let i = i + 1;
+        }
+        let i = 0;
+        while(i < 4)
+        {
+            let map[5 * 32 + i] = 1;
+            let i = i + 1;
+        }
+        let i = 0;
+        while(i < 3)
+        {
+            let map[5 * 32 + 6 + i] = 1;
+            let i = i + 1;
+        }
+        let i = 0;
+        while(i < 3)
+        {
+            let map[5 * 32 + 11 + i] = 1;
+            let i = i + 1;
+        }
+        let i = 0;
+        while(i < 3)
+        {
+            let map[5 * 32 + 16 + i] = 1;
+            let i = i + 1;
+        }
+        let i = 0;
+        while(i < 2)
+        {
+            let map[5 * 32 + 21 + i] = 1;
+            let i = i + 1;
+        }
+        let i = 0;
+        while(i < 3)
+        {
+            let map[5 * 32 + 25 + i] = 1;
+            let i = i + 1;
+        }
+        let i = 0;
+        while(i < 5)
+        {
+            let map[11 * 32 + 17 + i] = 1;
+            let i = i + 1;
+        }
+        let i = 0;
+        while(i < 3)
+        {
+            let map[(13 + i) * 32] = 1;
+            let i = i + 1;
+        }
+        let i = 0;
+        while(i < 3)
+        {
+            let map[(13 + i) * 32 + 1] = 1;
+            let i = i + 1;
+        }
+        let i = 0;
+        while(i < 4)
+        {
+            let map[(12 + i) * 32 + 3] = 1;
+            let i = i + 1;
+        }
+        let i = 0;
+        while(i < 5)
+        {
+            let map[(11 + i) * 32 + 5] = 1;
+            let i = i + 1;
+        }
+        let map[11 * 32 + 8] = 1;
+        let map[12 * 32 + 10] = 2;
+        let map[12 * 32 + 11] = 3;
+        let i = 0;
+        while(i < 2)
+        {
+            let map[11 * 32 + 13 + i] = 1;
+            let i = i + 1;
+        }
+        let i = 0;
+        while(i < 6)
+        {
+            let map[13 * 32 + 26 + i] = 1;
+            let i = i + 1;
+        }
+        let i = 0;
+        while(i < 6)
+        {
+            let map[14 * 32 + 26 + i] = 1;
+            let i = i + 1;
+        }
+        let i = 0;
+        while(i < 10)
+        {
+            let map[15 * 32 + 22 + i] = 1;
+            let i = i + 1;
+        }
+
+        let i = 0;
+        while(i < 512)
+        {
+           do Drawblock(i, map[i]);
+           let i = i + 1;
+        }
+        do drawCastle(castleX, castleY);
+        do drawSun();
+        do drawUp(upX, upY);
+        return this;
+    }
+    method void restart()
+    {
+        var int i;
+        let castleX = 0;
+        let castleY = (4 * 16) + 15;
+        let sunX = (28 * 16);
+        let sunY = (3 * 16) + 15;
+        let upX = (28 * 16);
+        let upY = (14 * 16) + 15;
+
+        do Screen.clearScreen();
+        
+        let i = 0;
+        while(i < (16 * 32))
+        {
+            let map[i] = 0;
+            let i = i + 1;
+        }
+
+        
+        let i = 0;
+        while(i < 4)
+        {
+            let map[5 * 32 + i] = 1;
+            let i = i + 1;
+        }
+        let i = 0;
+        while(i < 3)
+        {
+            let map[5 * 32 + 6 + i] = 1;
+            let i = i + 1;
+        }
+        let i = 0;
+        while(i < 3)
+        {
+            let map[5 * 32 + 11 + i] = 1;
+            let i = i + 1;
+        }
+        let i = 0;
+        while(i < 3)
+        {
+            let map[5 * 32 + 16 + i] = 1;
+            let i = i + 1;
+        }
+        let i = 0;
+        while(i < 2)
+        {
+            let map[5 * 32 + 21 + i] = 1;
+            let i = i + 1;
+        }
+        let i = 0;
+        while(i < 3)
+        {
+            let map[5 * 32 + 25 + i] = 1;
+            let i = i + 1;
+        }
+        let i = 0;
+        while(i < 5)
+        {
+            let map[11 * 32 + 17 + i] = 1;
+            let i = i + 1;
+        }
+        let i = 0;
+        while(i < 3)
+        {
+            let map[(13 + i) * 32] = 1;
+            let i = i + 1;
+        }
+        let i = 0;
+        while(i < 3)
+        {
+            let map[(13 + i) * 32 + 1] = 1;
+            let i = i + 1;
+        }
+        let i = 0;
+        while(i < 4)
+        {
+            let map[(12 + i) * 32 + 3] = 1;
+            let i = i + 1;
+        }
+        let i = 0;
+        while(i < 5)
+        {
+            let map[(11 + i) * 32 + 5] = 1;
+            let i = i + 1;
+        }
+        let map[11 * 32 + 8] = 1;
+        let map[12 * 32 + 10] = 2;
+        let map[12 * 32 + 11] = 3;
+        let i = 0;
+        while(i < 2)
+        {
+            let map[11 * 32 + 13 + i] = 1;
+            let i = i + 1;
+        }
+        let i = 0;
+        while(i < 6)
+        {
+            let map[13 * 32 + 26 + i] = 1;
+            let i = i + 1;
+        }
+        let i = 0;
+        while(i < 6)
+        {
+            let map[14 * 32 + 26 + i] = 1;
+            let i = i + 1;
+        }
+        let i = 0;
+        while(i < 10)
+        {
+            let map[15 * 32 + 22 + i] = 1;
+            let i = i + 1;
+        }
+
+        let i = 0;
+        while(i < 512)
+        {
+           do Drawblock(i, map[i]);
+           let i = i + 1;
+        }
+        do drawCastle(castleX, castleY);
+        do drawSun();
+        do drawUp(upX, upY);
+        return;
+    }
+    method void dispose()
+    {
+        do Memory.deAlloc(this);
+        return;
+    }
+    method int mapValue(int i)
+    {
+        return map[i];
+    }
+    method void Drawblock(int i, int type) // type 0 = none; type 1 = brick; type 2 = fake_brick; type 3 = invisible_brick
+    {
+        var int x, y;
+        let x = (i - (i / 32 * 32)) * 16;
+        let y = (i / 32) * 16;
+
+        if((type = 1) | (type = 2))
+        {
+            do Screen.setColor(true);
+            do Screen.drawLine(x, y, x + 15, y);
+            do Screen.drawLine(x, y + 8, x + 15, y + 8);
+            do Screen.drawLine(x + 4, y, x + 4, y + 8);
+            do Screen.drawLine(x + 10, y + 8, x + 10, y + 15);
+        }
+        return;
+    }
+    method void drawUp(int x, int y)
+    {
+        do Screen.setColor(false);
+        do Screen.drawRectangle(x, y - 31, x + 31, y);
+        
+        do Screen.setColor(true);
+        do Screen.drawLine(x, y, x, y - 31);
+        do Screen.drawLine(x, y - 31, x + 31, y - 31);
+        do Screen.drawLine(x + 31, y, x + 31, y - 31);
+        do Screen.drawLine(x + 1, y - 22, x + 15, y - 29);
+        do Screen.drawLine(x + 31, y - 22, x + 16, y - 29);
+        do Screen.drawLine(x + 1, y - 13, x + 15, y - 20);
+        do Screen.drawLine(x + 31, y - 13, x + 16, y - 20);
+        do Screen.drawLine(x + 1, y - 4, x + 15, y - 11);
+        do Screen.drawLine(x + 31, y - 4, x + 16, y - 11);
+        return;
+    }
+    method void drawCastle(int x, int y)
+    {
+        //GATE
+        do Screen.setColor(true);
+        do Screen.drawRectangle(x + 22, y - 20, x + 42, y);
+        do Screen.drawCircle(x + 32, y - 20, 10);
+        //BOX
+        do Screen.drawLine(x, y - 55, x + 63, y - 55);
+        do Screen.drawLine(x, y - 55, x, y - 35);
+        do Screen.drawLine(x, y - 35, x + 63, y - 35); 
+        do Screen.drawLine(x + 63, y - 55, x + 63, y - 35);
+        // EXIT
+        do Screen.drawLine(x + 8, y - 52, x + 16, y - 52);
+        do Screen.drawLine(x + 8, y - 46, x + 16, y - 46);
+        do Screen.drawLine(x + 8, y - 38, x + 16, y - 38);
+        do Screen.drawLine(x + 8, y - 52, x + 8, y - 38);
+        do Screen.drawLine(x + 20, y - 52, x + 30, y - 38);
+        do Screen.drawLine(x + 30, y - 52, x + 20, y - 38);
+        do Screen.drawLine(x + 34, y - 52, x + 42, y - 52);
+        do Screen.drawLine(x + 34, y - 38, x + 42, y - 38);
+        do Screen.drawLine(x + 38, y - 52, x + 38, y - 38);
+        do Screen.drawLine(x + 46, y - 52, x + 54, y - 52);
+        do Screen.drawLine(x + 50, y - 52, x + 50, y - 38);
+        return;
+    }
+    method void drawSun()
+    {
+        do Screen.setColor(true);
+        do Screen.drawLine(sunX + 20, sunY - 63, sunX + 20, sunY - 52);   //1/4 circle     
+        do Screen.drawLine(sunX + 21, sunY - 51, sunX + 22, sunY - 44);        
+        do Screen.drawLine(sunX + 23, sunY - 43, sunX + 27, sunY - 35);
+        do Screen.drawLine(sunX + 28, sunY - 34, sunX + 32, sunY - 29);
+        do Screen.drawLine(sunX + 33, sunY - 29, sunX + 45, sunY - 21);
+        do Screen.drawLine(sunX + 46, sunY - 21, sunX + 53, sunY - 19);
+        do Screen.drawLine(sunX + 54, sunY - 19, sunX + 63, sunY - 19);
+
+        do Screen.drawLine(sunX, sunY - 60, sunX + 20, sunY - 63); //draw sunlight
+        do Screen.drawLine(sunX, sunY - 60, sunX + 20, sunY - 55);
+        do Screen.drawLine(sunX + 3, sunY - 35, sunX + 20, sunY - 55);
+        do Screen.drawLine(sunX + 3, sunY - 35, sunX + 23, sunY - 41);
+        do Screen.drawLine(sunX + 10, sunY - 20, sunX + 25, sunY - 38);
+        do Screen.drawLine(sunX + 10, sunY - 20, sunX + 33, sunY - 28);
+        do Screen.drawLine(sunX + 28, sunY - 3, sunX + 34, sunY - 28);
+        do Screen.drawLine(sunX + 28, sunY - 3, sunX + 46, sunY - 20);
+        do Screen.drawLine(sunX + 63, sunY, sunX + 54, sunY - 18);
+        do Screen.drawLine(sunX + 63, sunY, sunX + 63, sunY - 19);
+
+        do Screen.drawCircle(sunX + 37, sunY - 54, 2);//eyes
+        do Screen.drawCircle(sunX + 51, sunY - 54, 2);
+
+        do Screen.drawLine(sunX + 35, sunY - 39, sunX + 40, sunY - 34);
+        do Screen.drawLine(sunX + 41, sunY - 34, sunX + 48, sunY - 32);
+        do Screen.drawLine(sunX + 48, sunY - 32, sunX + 56, sunY - 34);
+        do Screen.drawLine(sunX + 27, sunY - 35, sunX + 28, sunY - 34);
+        do Screen.drawLine(sunX + 53, sunY - 33, sunX + 55, sunY - 27);
+        do Screen.drawLine(sunX + 57, sunY - 35, sunX + 55, sunY - 27);
+        return;
+    }
+    method void drawArrow(int arrowX, int arrowY)
+    {
+       
+        do Screen.setColor(true);
+        do Screen.drawLine(arrowX + 8, arrowY - 15, arrowX + 8, arrowY - 3);
+        do Screen.drawLine(arrowX + 6, arrowY - 12, arrowX + 8, arrowY - 15);
+        do Screen.drawLine(arrowX + 8, arrowY - 15, arrowX + 10, arrowY - 12);
+        do Screen.drawLine(arrowX + 6, arrowY - 1, arrowX + 8, arrowY - 3);
+        do Screen.drawLine(arrowX + 8, arrowY - 3, arrowX + 10, arrowY - 1);
+        return;
+    }
+    method void drawCat(int catX,int catY)
+    {
+        do Screen.setColor(true);
+        do Screen.drawCircle(catX + 16, catY - 12, 10); //head
+        do Screen.setColor(false);
+        do Screen.drawCircle(catX + 16, catY - 12, 9); //head
+        do Screen.setColor(true);
+        do Screen.drawLine(catX + 7, catY - 19, catX + 7, catY - 26); //leftear
+        do Screen.drawLine(catX + 7, catY - 26, catX + 13, catY - 21);
+        do Screen.drawLine(catX + 25, catY - 19, catX + 25, catY - 26); //rightear
+        do Screen.drawLine(catX + 25, catY - 26, catX + 19, catY - 21);
+        do Screen.drawLine(catX + 10, catY - 16, catX + 14, catY - 16);  //leftecatYe
+        do Screen.drawLine(catX + 18, catY - 16, catX + 22, catY - 16);  //rightecatYe
+        do Screen.drawLine(catX + 10, catY - 12, catX + 4, catY - 12);  //鬍子
+        do Screen.drawLine(catX + 10, catY - 9, catX + 3, catY - 9);
+        do Screen.drawLine(catX + 22, catY - 12, catX + 28, catY - 12);
+        do Screen.drawLine(catX + 22, catY - 9, catX + 29, catY - 9);
+        do Screen.drawLine(catX + 12, catY - 12, catX + 16, catY - 8);  //mouth
+        do Screen.drawLine(catX + 16, catY - 8, catX + 20, catY - 12);
+        return;
+    }
+    method void drawSpike()
+    {
+        do Screen.setColor(true);
+        do Screen.drawLine(12 * 16 + 3, 4 * 16 + 15 , 12 * 16 + 8, 4 * 16);
+        do Screen.drawLine(12 * 16 + 14, 4 * 16 + 15 , 12 * 16 + 8, 4 * 16);
+        return;
+    }
+    method boolen onGround(int x, int y)
+    {
+        return((map[((y + 1) / 16) * 32 + ((x + 8) / 16)] = 1) | (map[((y + 1) / 16) * 32 + ((x + 8) / 16)] = 3) | (map[((y + 1) / 16) * 32 + ((x + 5) / 16)] = 1) | (map[((y + 1) / 16) * 32 + ((x + 5) / 16)] = 3)) ;
+    }
+    method void fakeGround()
+    {
+        do Screen.setColor(false);
+        do Screen.drawRectangle(10 * 16, 12 * 16, 10 * 16 + 15, 12 * 16 + 15);
+        do Drawblock(12 * 32 + 11, 1);
+        return;
+    }
+    method void headBlock()
+    {
+        let map[12 * 32 + 20] = 1;
+        let map[12 * 32 + 21] = 1;
+        let map[12 * 32 + 22] = 1;
+        let map[12 * 32 + 23] = 1;
+        let map[12 * 32 + 24] = 1;
+        let map[12 * 32 + 25] = 1;
+        return;
+    }
+    method boolean finished(int x, int y)
+    {
+        return( (x > (castleX + 4) ) & (y < (castleY + 1)) & ( x < (castleX + 46) ) & ( y > (castleY - 55) ) );
+    }
+    method boolean blockRight(int x, int y)
+    {
+        return( map[((y / 16) * 32) + ((x + 16) / 16)] = 1);
+    }
+    method boolean blockLeft(int x, int y)
+    {
+        return( map[((y / 16) * 32) + ((x - 1) / 16)] = 1);
+    }
+    method boolean blockUp(int x, int y)
+    {
+        return( map[(((y - 32) / 16) * 32) + (x / 16)] = 1);
+    }
+}

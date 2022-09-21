@@ -1,0 +1,194 @@
+class Player
+{
+    field int x, y; //player's location
+
+    constructor Player new(int Ax, int Ay)
+    {
+        let x = Ax;
+        let y = Ay;
+        do draw(1);
+        return this;
+    }
+    method void restart(int Ax, int Ay)
+    {
+        let x = Ax;
+        let y = Ay;
+        do draw(1);
+        return;
+    }
+    method void screen2()
+    {
+        let x = 29 * 16;
+        let y = (12 * 16) + 15;
+        do draw(2);
+        return;
+    }
+
+    method void dispose()
+    {
+        do Memory.deAlloc(this);
+        return;
+    }
+    method int getX()
+    {
+        return x;
+    }
+    method int getY()
+    {
+        return y;
+    }
+    method void drawRight()
+    {
+        if(x - ((x/2) * 2) = 0)
+        {
+            do Screen.setColor(true);
+            do Screen.drawCircle(x + 8, y - 22, 4); //head
+            do Screen.drawLine(x + 8, y - 19, x + 8, y - 7); //body
+            do Screen.drawLine(x + 3, y - 14, x + 8, y - 14); //back arm
+            do Screen.drawLine(x + 1, y - 10, x + 3, y - 13); //back arm
+            do Screen.drawLine(x + 8, y - 15, x + 12, y - 15); //front arm
+            do Screen.drawLine(x + 12, y - 15, x + 14, y - 19); //front arm
+            do Screen.drawLine(x + 7, y - 7, x + 5, y - 2); // back leg
+            do Screen.drawLine(x + 4, y - 1, x + 1, y);
+            do Screen.drawLine(x + 9, y - 9, x + 14, y - 6); //front leg
+            do Screen.drawLine(x + 12, y, x + 14, y - 6);
+        }
+        else
+        {
+            do Screen.setColor(true);
+            do Screen.drawCircle(x + 8, y - 22, 4); //head
+            do Screen.drawLine(x + 8, y - 19, x + 8, y - 6); //body
+            do Screen.drawLine(x + 7, y - 15, x + 4, y - 12); //back arm
+            do Screen.drawLine(x + 6, y - 10, x + 4, y - 12); //back arm
+            do Screen.drawLine(x + 9, y - 15, x + 10, y - 13); //front arm
+            do Screen.drawLine(x + 11, y - 12, x + 14, y - 19); //front arm
+            do Screen.drawLine(x + 7, y - 5, x + 0, y); // back leg
+            do Screen.drawLine(x + 9, y - 7, x + 12, y); //front leg
+        }
+        return;
+    }
+
+    method void drawLeft()
+    {
+        if(x - ((x/2) * 2) = 0)
+        {
+            do Screen.setColor(true);
+            do Screen.drawCircle(x + 8, y - 22, 4); //head
+            do Screen.drawLine(x + 8, y - 19, x + 8, y - 7); //body
+            do Screen.drawLine(x + 3, y - 15, x + 8, y - 15); //back arm
+            do Screen.drawLine(x + 1, y - 19, x + 3, y - 15); //back arm
+            do Screen.drawLine(x + 8, y - 14, x + 12, y - 14); //front arm
+            do Screen.drawLine(x + 12, y - 13, x + 14, y - 10); //front arm
+            do Screen.drawLine(x + 8, y - 7, x + 10, y - 2); // back leg
+            do Screen.drawLine(x + 10, y - 1, x + 14, y);
+            do Screen.drawLine(x + 8, y - 9, x + 1, y - 6); //front leg
+            do Screen.drawLine(x + 3, y, x + 1, y - 6);
+        }
+        else
+        {
+            do Screen.setColor(true);
+            do Screen.drawCircle(x + 8, y - 22, 4); //head
+            do Screen.drawLine(x + 8, y - 19, x + 8, y - 6); //body
+            do Screen.drawLine(x + 8, y - 15, x + 12, y - 12); //back arm
+            do Screen.drawLine(x + 9, y - 10, x + 12, y - 12); //back arm
+            do Screen.drawLine(x + 7, y - 15, x + 6, y - 13); //front arm
+            do Screen.drawLine(x + 5, y - 12, x + 1, y - 19); //front arm
+            do Screen.drawLine(x + 8, y - 5, x + 14, y); // back leg
+            do Screen.drawLine(x + 7, y - 7, x + 0, y); //front leg
+        }
+        return;
+    }
+
+    method void drawSlip()
+    {
+        do Screen.setColor(false);
+        do Screen.drawRectangle(x, y-26, x+14, y);
+        do Screen.setColor(true);
+        do Screen.drawCircle(x + 22, y - 8, 4); //head
+        do Screen.drawLine(x + 18, y - 8, x + 7, y - 8); //body
+        do Screen.drawLine(x + 15, y - 8, x + 13, y - 3); //back arm
+        do Screen.drawLine(x + 16, y - 8, x + 17, y - 5); //front arm
+        do Screen.drawLine(x + 18, y - 2, x + 17, y - 5); //front arm
+        do Screen.drawLine(x + 0, y - 3, x + 7, y - 8); // back leg
+        do Screen.drawLine(x + 10, y - 8, x + 9, y - 3); //front leg
+        do Screen.drawLine(x + 2, y, x + 9, y - 3);
+        return;
+    }
+
+    method void draw(int jumpDir)
+    {
+        if(jumpDir=1)
+        {
+            do drawRight();
+        }
+        else
+        {
+            do drawLeft();
+        }
+        return;
+    }
+
+    method void moveRight()
+    {
+        if((x + 16) < 511) //make sure it stay inside
+        {
+            do Screen.setColor(false);
+            do Screen.drawRectangle(x, y-26, x+14, y);
+            let x = x + 1;
+            do drawRight();
+        }
+        return;
+    }
+    method void moveLeft()
+    {
+        if(x > 0) //make sure it stay inside
+        {
+            do Screen.setColor(false);
+            do Screen.drawRectangle(x, y-26, x+14, y);
+            let x = x - 1;
+            do drawLeft(); 
+        }
+        return;
+    }
+    method void moveUp(int jumpDir)
+    {
+        if((y - 31) > 0)
+        {
+            do Screen.setColor(false);
+            do Screen.drawRectangle(x, y-26, x+14, y);
+            let y = y - 8;
+            if(y < 31)
+            {
+                let y = 31;
+            }
+            do draw(jumpDir);
+        }
+        return;
+    }
+    method void float(int jumpDir)
+    {
+        if((y - 31) > 0)
+        {
+            do Screen.setColor(false);
+            do Screen.drawRectangle(x, y-26, x+14, y);
+            let y = y - 2;
+            if(y < 31)
+            {
+                let y = 31;
+            }
+            do draw(jumpDir);
+        }
+        return;
+    }
+    method void moveDown(int jumpDir)
+    {
+        if(y < 255)
+        {
+            do Screen.setColor(false);
+            do Screen.drawRectangle(x, y-26, x+14, y);
+            let y = y + 1;
+            do draw(jumpDir);
+        }
+        return;
+    }
+}

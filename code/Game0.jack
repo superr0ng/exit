@@ -1,0 +1,142 @@
+//Game0
+
+class Game0
+{
+    field Player player;
+    field Map0 map0;
+    field int direction;
+    field int deathCount;
+    field int jumpDir;
+
+    constructor Game0 new()
+    {
+        let map0 = Map0.new();
+        let player = Player.new(1 * 16, (12 * 16) + 15);
+        let direction = 0;
+        let deathCount = 0;
+        let jumpDir = 1;
+        do Output.moveCursor(0, 0);
+        do Output.printString("LIFE X ");
+        do Output.printInt(3 - deathCount);
+        return this;
+    }
+
+    method void dispose() {
+        do player.dispose();
+        do map0.dispose();
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    method void run() 
+    {
+        var char key;
+        var int jumpCount;
+        var boolean exit;
+        var int i;
+
+        let key = 0;
+        let jumpCount = -64;
+        let exit = false;
+
+        do Output.moveCursor(9, 19);
+        do Output.printString("Press Right to Move Right.");
+        while(~(key = 132))
+        {
+            let key = Keyboard.keyPressed();
+            if(key = 132)
+            {
+                let i = 0;
+                while(i < 16)
+                {
+                    let jumpDir = 1;
+                    do player.moveRight();
+                    do Sys.wait(15);
+                    let i = i + 1;
+                }
+            }
+        }
+        do Screen.setColor(false);
+        do Screen.drawRectangle(150, 95, 370, 112);
+        do Output.moveCursor(9, 19);
+        do Output.printString("Press Left to Move Left.");
+        while(~(key = 130))
+        {
+            let key = Keyboard.keyPressed();
+            if(key = 130)
+            {
+                let i = 0;
+                while(i < 16)
+                {
+                    let jumpDir = 2;
+                    do player.moveLeft();
+                    do Sys.wait(15);
+                    let i = i + 1;
+                }
+            }
+        }
+        do Screen.setColor(false);
+        do Screen.drawRectangle(150, 95, 370, 112);
+        do Output.moveCursor(9, 22);
+        do Output.printString("Press Up to Jump.");
+        while(~(key = 131))
+        {
+            let key = Keyboard.keyPressed();
+            if(key = 131)
+            {
+                let jumpCount = 8;
+                if(jumpCount > 0)
+                {
+                    do player.moveUp(jumpDir);
+                    do Sys.wait(15);
+                    let jumpCount = jumpCount - 1;
+                }
+            }
+        }
+        do Screen.setColor(false);
+        do Screen.drawRectangle(150, 95, 370, 112);
+        do map0.drawArrow();
+
+        while (~exit)
+        {
+            let key = Keyboard.keyPressed();
+
+            let direction = 0; //none
+            if (key = 140)
+            {
+                let exit = true;
+            }
+            if((key = 131) & map0.onGround(player.getX(), player.getY())) //jump
+            {
+                let jumpCount = 8;
+            }
+            if(jumpCount > 0)
+            {
+                do player.moveUp(jumpDir);
+                let jumpCount = jumpCount - 1;
+            }
+            if(key = 130) //move left
+            {
+                let jumpDir = 2;
+                do player.moveLeft();
+                
+            }
+            if(key = 132) // move right
+            {
+                let jumpDir = 1;
+                do player.moveRight();
+                
+            }
+            if(~map0.onGround(player.getX(), player.getY()))
+            {
+                do player.moveDown(jumpDir);
+            }
+            if(map0.finished(player.getX(), player.getY()))
+            {
+                let exit = true;
+            }
+            do Sys.wait(15); // Delays the next movement.
+        }
+        return;
+    }
+}

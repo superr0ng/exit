@@ -1,0 +1,151 @@
+//Game1
+class Game1
+{
+    field Player player;
+    field Map1 map1;
+    field int direction;
+    field int jumpDir;
+    field int deathCount;
+    field boolean fakeGround;
+    field boolean slipTrap;
+    field boolean fakeCastle;
+    field boolean screen2;
+
+    constructor Game1 new()
+    {
+        let map1 = Map1.new();
+        let player = Player.new(1 * 16, (12 * 16) + 15);
+        let direction = 0;
+        let jumpDir = 1;
+        let deathCount = 0;
+
+        let fakeGround = true;
+        let slipTrap = true;
+        let fakeCastle = true;
+        let screen2 = false;
+
+        do Output.moveCursor(0, 0);
+        do Output.printString("LIFE X ");
+        do Output.printInt(3 - deathCount);
+        return this;
+    }
+
+    method void dispose()
+    {
+        do player.dispose();
+        do map1.dispose();
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    method void run() 
+    {
+        var char key;
+        var int jumpCount;
+        var boolean dead;
+        var boolean exit;
+
+        let key = 0;
+        let jumpCount = -64;
+        let dead = false;
+        let exit = false;
+
+        while (~exit)
+        {
+            let key = Keyboard.keyPressed();
+            let direction = 0; //none
+            if (key = 140)
+            {
+                let exit = true;
+            }
+            if((key = 131) & map1.onGround(player.getX(), player.getY())) //jump
+            {
+                let jumpCount = 8;
+            }
+            if(jumpCount > 0)
+            {
+                do player.moveUp(jumpDir);
+                let jumpCount = jumpCount - 1;
+            }
+            if(key = 130) //move left
+            {
+                let jumpDir = 2;
+                if(~map1.blockLeft( player.getX(), player.getY() ) )
+                {
+                    do player.moveLeft();
+                }
+                
+            }
+            if(key = 132) // move right
+            {
+                let jumpDir = 1;
+                if(~map1.blockRight( player.getX(), player.getY() ) )
+                {
+                    do player.moveRight();
+                }
+            }
+            if(~map1.onGround(player.getX(), player.getY())) // keep falling until on ground
+            {
+                do player.moveDown(jumpDir);
+            }
+            if((map1.finished(player.getX(), player.getY())) & screen2) // reach the castle, finished
+            {
+                let exit = true;
+            }
+
+            if((player.getX() > (15 * 16)) & fakeGround) // fake ground trap
+            {
+                do map1.fakeGround();
+                let fakeGround = false;
+            }
+            if((player.getX() > (27 * 16)) & fakeCastle) //fake castle
+            {
+                let fakeCastle = false;
+                do map1.fakeCastleDisapper();
+            }
+            if(( (player.getX() > (24 * 16)) & (player.getX() < ((24 * 16) + 4)) & (player.getY() = ((12 * 16) + 15))) & slipTrap) // slip trap
+            {
+                do player.drawSlip();
+                let dead = true;
+            }
+            if(player.getY() > ((15 * 16) + 14)) // if player falls under ground
+            {
+                let dead = true;
+            }
+
+            if(player.getX() < 2) // screen2
+            {
+                let fakeGround = false;
+                let slipTrap = false;
+                let fakeCastle = false;
+                let screen2 = true;
+                do map1.screen2();
+                do player.screen2();
+                do Output.moveCursor(0, 0);
+                do Output.printString("LIFE X ");
+                do Output.printInt(3 - deathCount);
+            }
+            if(dead)
+            {
+                let deathCount = deathCount + 1;
+                let dead = false;
+                do Sys.wait(1000);
+                do map1.restart();
+                do player.restart(1 * 16, (12 * 16) + 15);
+                let direction = 0;
+                let jumpDir = 1;
+
+                let fakeGround = true;
+                let slipTrap = true;
+                let fakeCastle = true;
+                let screen2 = false;
+                
+                do Output.moveCursor(0, 0);
+                do Output.printString("LIFE X ");
+                do Output.printInt(3 - deathCount);
+            }
+            do Sys.wait(15); // Delays the next movement.
+        }
+        return;
+    }
+}

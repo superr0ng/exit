@@ -1,0 +1,99 @@
+//startScreen
+
+class Startscreen
+{
+    function void draw()
+    {
+        var char key;
+        var boolean exit;
+        var int count;
+        let key = 0;
+        let exit = false;
+        let count = 0;
+        
+        do Startscreen.drawDoor();
+        do Startscreen.drawMan();
+        do Startscreen.drawWords();
+        do Startscreen.drawCommands();
+
+        while(~exit)
+        {
+            let key = Keyboard.keyPressed();
+            let count = count + 1;
+            if(count = 1000)
+            {
+                do Screen.setColor(false);
+                do Screen.drawRectangle(270, 179, 480, 254);
+            }
+            if(count = 2000)
+            {
+                let count = 0;
+                do Startscreen.drawCommands();
+            }
+            do Startscreen.drawWords();
+            if(key = 32)
+            {
+                let exit = true;
+            }
+        }
+        return;
+    }
+
+    function void drawDoor()
+    {
+        do Screen.setColor(true);
+        do Screen.drawLine(69, 37, 196, 37);
+        do Screen.drawLine(69, 37, 69, 202);
+        do Screen.drawLine(196, 37, 196, 202);
+        do Screen.drawLine(69, 202, 107, 230);
+        do Screen.drawLine(196, 202, 234, 230);
+        return;
+    }
+
+    function void drawMan()
+    {
+        do Screen.setColor(true);
+        do Screen.drawCircle(113, 76, 15);
+        do Screen.drawLine(111, 90, 125, 138);
+        do Screen.drawLine(114, 101, 99, 121);
+        do Screen.drawLine(99, 121, 71, 121);
+        do Screen.drawLine(115, 104, 147, 104);
+        do Screen.drawLine(147, 104, 160, 129);
+        do Screen.drawLine(125, 138, 93, 188);
+        do Screen.drawLine(125, 138, 130, 181);
+        do Screen.drawLine(130, 181, 178, 172);
+        do Screen.setColor(false);
+        do Screen.drawCircle(113, 76, 14);
+        return;
+    }
+
+    function void drawWords()
+    {
+        do Screen.setColor(true);
+
+        do Screen.drawLine(259, 79, 293, 79);
+        do Screen.drawLine(259, 107, 293, 107);
+        do Screen.drawLine(259, 133, 293, 133);
+        do Screen.drawLine(259, 79, 259, 133);
+
+        do Screen.drawLine(310, 79, 346, 133);
+        do Screen.drawLine(346, 79, 310, 133);
+
+        do Screen.drawLine(363, 79, 399, 79);
+        do Screen.drawLine(363, 133, 399, 133);
+        do Screen.drawLine(381, 79, 381, 133);
+
+        do Screen.drawLine(417, 79, 457, 79);
+        do Screen.drawLine(437, 79, 437, 133);
+
+        return;
+    }
+
+    function void drawCommands()
+    {
+        do Output.moveCursor(18, 35);
+        do Output.printString("press space to start...");
+        return;
+    }
+    
+}

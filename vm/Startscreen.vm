@@ -1,0 +1,304 @@
+function Startscreen.draw 3
+push constant 0
+pop local 0
+push constant 0
+pop local 1
+push constant 0
+pop local 2
+call Startscreen.drawDoor 0
+pop temp 0
+call Startscreen.drawMan 0
+pop temp 0
+call Startscreen.drawWords 0
+pop temp 0
+call Startscreen.drawCommands 0
+pop temp 0
+label WHILE_EXP0
+push local 1
+not
+not
+if-goto WHILE_END0
+call Keyboard.keyPressed 0
+pop local 0
+push local 2
+push constant 1
+add
+pop local 2
+push local 2
+push constant 1000
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push constant 270
+push constant 179
+push constant 480
+push constant 254
+call Screen.drawRectangle 4
+pop temp 0
+label IF_FALSE0
+push local 2
+push constant 2000
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+pop local 2
+call Startscreen.drawCommands 0
+pop temp 0
+label IF_FALSE1
+call Startscreen.drawWords 0
+pop temp 0
+push local 0
+push constant 32
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant 0
+not
+pop local 1
+label IF_FALSE2
+goto WHILE_EXP0
+label WHILE_END0
+push constant 0
+return
+function Startscreen.drawDoor 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push constant 69
+push constant 37
+push constant 196
+push constant 37
+call Screen.drawLine 4
+pop temp 0
+push constant 69
+push constant 37
+push constant 69
+push constant 202
+call Screen.drawLine 4
+pop temp 0
+push constant 196
+push constant 37
+push constant 196
+push constant 202
+call Screen.drawLine 4
+pop temp 0
+push constant 69
+push constant 202
+push constant 107
+push constant 230
+call Screen.drawLine 4
+pop temp 0
+push constant 196
+push constant 202
+push constant 234
+push constant 230
+call Screen.drawLine 4
+pop temp 0
+push constant 0
+return
+function Startscreen.drawMan 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push constant 113
+push constant 76
+push constant 15
+call Screen.drawCircle 3
+pop temp 0
+push constant 111
+push constant 90
+push constant 125
+push constant 138
+call Screen.drawLine 4
+pop temp 0
+push constant 114
+push constant 101
+push constant 99
+push constant 121
+call Screen.drawLine 4
+pop temp 0
+push constant 99
+push constant 121
+push constant 71
+push constant 121
+call Screen.drawLine 4
+pop temp 0
+push constant 115
+push constant 104
+push constant 147
+push constant 104
+call Screen.drawLine 4
+pop temp 0
+push constant 147
+push constant 104
+push constant 160
+push constant 129
+call Screen.drawLine 4
+pop temp 0
+push constant 125
+push constant 138
+push constant 93
+push constant 188
+call Screen.drawLine 4
+pop temp 0
+push constant 125
+push constant 138
+push constant 130
+push constant 181
+call Screen.drawLine 4
+pop temp 0
+push constant 130
+push constant 181
+push constant 178
+push constant 172
+call Screen.drawLine 4
+pop temp 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+push constant 113
+push constant 76
+push constant 14
+call Screen.drawCircle 3
+pop temp 0
+push constant 0
+return
+function Startscreen.drawWords 0
+push constant 0
+not
+call Screen.setColor 1
+pop temp 0
+push constant 259
+push constant 79
+push constant 293
+push constant 79
+call Screen.drawLine 4
+pop temp 0
+push constant 259
+push constant 107
+push constant 293
+push constant 107
+call Screen.drawLine 4
+pop temp 0
+push constant 259
+push constant 133
+push constant 293
+push constant 133
+call Screen.drawLine 4
+pop temp 0
+push constant 259
+push constant 79
+push constant 259
+push constant 133
+call Screen.drawLine 4
+pop temp 0
+push constant 310
+push constant 79
+push constant 346
+push constant 133
+call Screen.drawLine 4
+pop temp 0
+push constant 346
+push constant 79
+push constant 310
+push constant 133
+call Screen.drawLine 4
+pop temp 0
+push constant 363
+push constant 79
+push constant 399
+push constant 79
+call Screen.drawLine 4
+pop temp 0
+push constant 363
+push constant 133
+push constant 399
+push constant 133
+call Screen.drawLine 4
+pop temp 0
+push constant 381
+push constant 79
+push constant 381
+push constant 133
+call Screen.drawLine 4
+pop temp 0
+push constant 417
+push constant 79
+push constant 457
+push constant 79
+call Screen.drawLine 4
+pop temp 0
+push constant 437
+push constant 79
+push constant 437
+push constant 133
+call Screen.drawLine 4
+pop temp 0
+push constant 0
+return
+function Startscreen.drawCommands 0
+push constant 18
+push constant 35
+call Output.moveCursor 2
+pop temp 0
+push constant 23
+call String.new 1
+push constant 112
+call String.appendChar 2
+push constant 114
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 115
+call String.appendChar 2
+push constant 115
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 115
+call String.appendChar 2
+push constant 112
+call String.appendChar 2
+push constant 97
+call String.appendChar 2
+push constant 99
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 116
+call String.appendChar 2
+push constant 111
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 115
+call String.appendChar 2
+push constant 116
+call String.appendChar 2
+push constant 97
+call String.appendChar 2
+push constant 114
+call String.appendChar 2
+push constant 116
+call String.appendChar 2
+push constant 46
+call String.appendChar 2
+push constant 46
+call String.appendChar 2
+push constant 46
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+push constant 0
+return

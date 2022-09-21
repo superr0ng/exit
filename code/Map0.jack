@@ -1,0 +1,123 @@
+//Map0
+
+class Map0{
+
+    field Array map;
+    field int castleX, castleY;
+    field int arrowX, arrowY;
+
+    constructor Map0 new()
+    {
+        var int i;
+        let castleX = 27 * 16;
+        let castleY = 12 * 16 + 15;
+        let arrowX = 13 * 16;
+        let arrowY = 3 * 16 + 15;
+        let i = 0;
+        let map = Array.new(512);
+        
+        while(i < 512)
+        {
+            if(i < 416)
+            {
+                let map[i] = 0;
+            }
+            else
+            {
+                let map[i] = 1;
+            }
+            let i = i + 1;
+        }
+
+        do Screen.clearScreen();
+        let i = 0;
+        while(i < 512)
+        {
+           do Drawblock(i, map[i]);
+           let i = i + 1;
+        }
+        do drawCastle();
+        return this;
+    }
+    
+    method void dispose()
+    {
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    method void Drawblock(int i, int type)
+    {
+        var int x, y;
+        let x = (i - (i / 32 * 32)) * 16;
+        let y = (i / 32) * 16;
+
+        if((type = 1) | (type = 2))
+        {
+            do Screen.setColor(true);
+            do Screen.drawLine(x, y, x + 15, y);
+            do Screen.drawLine(x, y + 8, x + 15, y + 8);
+            do Screen.drawLine(x + 4, y, x + 4, y + 8);
+            do Screen.drawLine(x + 10, y + 8, x + 10, y + 15);
+        }
+        return;
+    }
+
+    method void drawCastle()
+    {
+        do Screen.setColor(true);
+        //GATE
+        do Screen.drawRectangle(castleX + 22, castleY - 20, castleX + 42, castleY);
+        do Screen.drawCircle(castleX + 32, castleY - 20, 10);
+        //BOX
+        do Screen.drawLine(castleX, castleY - 55, castleX + 63, castleY - 55);
+        do Screen.drawLine(castleX, castleY - 55, castleX, castleY - 35);
+        do Screen.drawLine(castleX, castleY - 35, castleX + 63, castleY - 35); 
+        do Screen.drawLine(castleX + 63, castleY - 55, castleX + 63, castleY - 35);
+        // EXIT
+        do Screen.drawLine(castleX + 8, castleY - 52, castleX + 16, castleY - 52);
+        do Screen.drawLine(castleX + 8, castleY - 46, castleX + 16, castleY - 46);
+        do Screen.drawLine(castleX + 8, castleY - 38, castleX + 16, castleY - 38);
+        do Screen.drawLine(castleX + 8, castleY - 52, castleX + 8, castleY - 38);
+        do Screen.drawLine(castleX + 20, castleY - 52, castleX + 30, castleY - 38);
+        do Screen.drawLine(castleX + 30, castleY - 52, castleX + 20, castleY - 38);
+        do Screen.drawLine(castleX + 34, castleY - 52, castleX + 42, castleY - 52);
+        do Screen.drawLine(castleX + 34, castleY - 38, castleX + 42, castleY - 38);
+        do Screen.drawLine(castleX + 38, castleY - 52, castleX + 38, castleY - 38);
+        do Screen.drawLine(castleX + 46, castleY - 52, castleX + 54, castleY - 52);
+        do Screen.drawLine(castleX + 50, castleY - 52, castleX + 50, castleY - 38);
+        return;
+    }
+    method void drawArrow()
+    {
+        do Screen.setColor(true);
+        do Screen.drawLine(arrowX, arrowY - 8, arrowX, arrowY - 23);
+        do Screen.drawLine(arrowX, arrowY - 8, arrowX + 47, arrowY - 8);
+        do Screen.drawLine(arrowX, arrowY - 23, arrowX + 47, arrowY - 23);
+        do Screen.drawLine(arrowX + 47, arrowY - 8, arrowX + 47, arrowY);
+        do Screen.drawLine(arrowX + 47, arrowY - 23, arrowX + 47, arrowY - 31);
+        do Screen.drawLine(arrowX + 47, arrowY, arrowX + 95, arrowY - 16);
+        do Screen.drawLine(arrowX + 47, arrowY - 31, arrowX + 95, arrowY - 16);
+        return;
+    }
+    method boolen onGround(int x,int y)
+    {
+        var int id;
+        let x = x / 32;
+        let y = (y + 1) / 16;
+        let id = (y * 32 + x);
+        if(map[id]=1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    method boolean finished(int x, int y)
+    {
+        return( (x > (castleX + 4) ) & (y < (castleY + 1)) & ( x < (castleX + 46) ) & ( y > (castleY - 55) ) );
+    }
+}

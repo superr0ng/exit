@@ -1,0 +1,290 @@
+// End 
+
+class End
+{
+    function void draw()
+    {
+        var int x;
+        var int y;
+        let x = 0;
+        let y = 12 * 16 + 15;
+        do End.walk(x, y);
+        let x = 187;
+        do End.door();
+        do Sys.wait(800);
+        do End.exclamation(x, y);
+        do Sys.wait(800);
+        do End.walk(x, y);
+
+        do End.showDoors();
+        do Sys.wait(800);
+        do End.showMan();
+        do Sys.wait(800);
+        do End.smallExclamation();
+        do Sys.wait(800);
+        return;
+    }
+
+    function void showMan()
+    {
+        do Screen.setColor(false);
+        do Screen.drawCircle(257, 145, 4);
+        do Screen.setColor(true);
+        do Screen.drawCircle(257, 145, 3);
+        do Screen.setColor(false);
+        do Screen.drawLine(257, 149, 257, 157);
+        do Screen.drawLine(254, 152, 260, 152);
+        do Screen.drawLine(257, 157, 254, 161);
+        do Screen.drawLine(257, 157, 260, 161);
+        return;
+    }
+
+    function void smallExclamation()
+    {
+        do Screen.setColor(true);
+        do Screen.drawRectangle(264, 130, 268, 142);
+        /*do Screen.drawLine(264, 130, 270, 130);
+        do Screen.drawLine(264, 130, 266, 148);
+        do Screen.drawLine(266, 148, 268, 148);
+        do Screen.drawLine(268, 148, 270, 130);*/
+        do Screen.drawCircle(266, 147, 2);
+        do Screen.setColor(false);
+        do Screen.drawRectangle(265, 131, 267, 141);
+        do Screen.drawCircle(266, 147, 1);
+        return;
+    }
+    function void door()
+    {
+        do Screen.setColor(false);
+        do Screen.drawLine(425, 10, 500, 10);//Box
+        do Screen.drawLine(425, 10, 425, 45);
+        do Screen.drawLine(425, 45, 500, 45);
+        do Screen.drawLine(500, 10, 500, 45);
+        
+        do Screen.drawLine(444, 17, 452, 17);//E
+        do Screen.drawLine(444, 25, 452, 25);
+        do Screen.drawLine(444, 33, 452, 33);
+        do Screen.drawLine(444, 17, 444, 33);
+
+        do Screen.drawLine(455, 17, 466, 33);//X
+        do Screen.drawLine(455, 33, 466, 17);
+
+        do Screen.drawLine(469, 17, 469, 33);//I
+
+        do Screen.drawLine(472, 17, 482, 17);//T
+        do Screen.drawLine(477, 17, 477, 33);
+
+        do Screen.drawRectangle(446, 68, 480, 101);//Door
+        do Screen.drawCircle(463, 68, 17);
+
+        do Screen.drawLine(37, 255, 446, 101);//Road
+        do Screen.drawLine(325, 255, 480, 101);
+
+        
+        return;
+    }
+
+    function void walk(int x, int y)
+    {
+        var int halt;
+        var int i;
+        
+        let halt = x + 187;
+        let i = 0;
+        do Screen.setColor(true);
+        if(x < 187)
+        {
+            do Screen.drawRectangle(0, 0, 511, 255);
+        }
+        else
+        {
+            do Screen.drawRectangle(x, y - 130, x + 75, y);
+            do End.door();
+        }
+        while(x < halt)
+        {
+            do Screen.setColor(true);
+            do Screen.drawRectangle(0, 0, 420, 255);
+            if(x - ((x/2) * 2) = 0)
+            {
+                if(x > 186)
+                {
+                    do End.door();
+                    do End.drawSmallMan1(x, y, i);
+                }
+                else
+                {
+                    do End.drawMan1(x, y);
+                }
+            }
+            else
+            {
+                if(x > 186)
+                {
+                    do End.door();
+                    do End.drawSmallMan2(x, y, i);
+                }
+                else
+                {
+                    do End.drawMan2(x, y);
+                }
+            }
+            let x = x + 17;
+            let i = i + 1;
+            do Sys.wait(400);
+        }
+
+        return;
+    }
+
+    function void exclamation(int x, int y)
+    {
+        do Screen.setColor(false);
+        do Screen.drawLine(x - 48, y - 180, x - 40, y - 110);
+        do Screen.drawLine(x - 40, y - 110, x - 20, y - 110);
+        do Screen.drawLine(x - 20, y - 110, x - 12, y - 180);
+        do Screen.drawLine(x - 12, y - 180, x - 48, y - 180);
+        do Screen.drawCircle(x - 30, y - 90, 10);
+        do Screen.setColor(true);
+        do Screen.drawCircle(x - 30, y - 90, 9);
+        return;
+    }
+
+    function void drawMan1(int x, int y)
+    {
+        do Screen.setColor(false);
+        do Screen.drawCircle(x + 40, y - 110, 20); //head
+        do Screen.drawLine(x + 40, y - 90, x + 40, y - 35); //body
+        do Screen.drawLine(x + 15, y - 70, x + 40, y - 70); //back arm
+        do Screen.drawLine(x + 5, y - 50, x + 15, y - 70); //back arm
+        do Screen.drawLine(x + 40, y - 75, x + 60, y - 75); //front arm
+        do Screen.drawLine(x + 60, y - 75, x + 70, y - 95); //front arm
+        do Screen.drawLine(x + 40, y - 35, x + 25, y - 10); // back leg
+        do Screen.drawLine(x + 25, y - 10, x + 5, y);
+        do Screen.drawLine(x + 40, y - 35, x + 70, y - 30); //front leg
+        do Screen.drawLine(x + 60, y, x + 70, y - 30);
+        do Screen.setColor(true);
+        do Screen.drawCircle(x + 40, y - 110, 19);
+        return;
+    }
+
+    function void drawSmallMan1(int x, int y, int i)
+    {
+        do Screen.setColor(false);
+        do Screen.drawCircle(x + 40, y - 110, 20 - i); //head
+        do Screen.drawLine(x + 40, y - 90 - i, x + 40, y - 35 - (i * 4)); //body
+
+        do Screen.drawLine(x + 40, y - 70 - (i * 2), x + 15 + i, y - 70 - (i * 2)); //back arm
+        do Screen.drawLine( x + 15 + i, y - 70 - (i * 2), x + 5 + i, y - 50 - (i * 3)); //back arm
+
+        do Screen.drawLine(x + 40, y - 75 - (i * 2), x + 60 - i, y - 75 - (i * 2)); //front arm
+        do Screen.drawLine(x + 60 - i, y - 75 - (i * 2), x + 70 - i, y - 95 - i); //front arm
+
+        do Screen.drawLine(x + 40, y - 35 - (i * 4), x + 25 + i, y - 10 - (i * 5)); // back leg
+        do Screen.drawLine(x + 25 + i, y - 10 - (i * 5), x + 5 + (i * 2), y - (i * 6));
+
+        do Screen.drawLine(x + 40, y - 35 - (i * 4), x + 70 - i, y - 30 - (i * 4)); //front leg
+        do Screen.drawLine(x + 60 + (i * 0.5), y - (i * 6), x + 70 - i, y - 30 - (i * 4));
+
+        do Screen.setColor(true);
+        do Screen.drawCircle(x + 40, y - 110, 19 - i);
+        return;
+    }
+
+    function void drawMan2(int x, int y)
+    {
+        do Screen.setColor(false);
+        do Screen.drawCircle(x + 40, y - 110, 20); //head
+        do Screen.drawLine(x + 40, y - 95, x + 40, y - 30); //body
+        do Screen.drawLine(x + 40, y - 75, x + 20, y - 60); //back arm
+        do Screen.drawLine(x + 30, y - 50, x + 20, y - 60); //back arm
+        do Screen.drawLine(x + 40, y - 75, x + 50, y - 65); //front arm
+        do Screen.drawLine(x + 50, y - 65, x + 70, y - 75); //front arm
+        do Screen.drawLine(x + 40, y - 30, x, y); // back leg
+        do Screen.drawLine(x + 40, y - 30, x + 60, y); //front leg
+        do Screen.setColor(true);
+        do Screen.drawCircle(x + 40, y - 110, 19);
+        return;
+    }
+
+    function void drawSmallMan2(int x, int y, int i)
+    {
+        do Screen.setColor(false);
+        do Screen.drawCircle(x + 40, y - 110, 20 - i); //head
+        do Screen.drawLine(x + 40, y - 90 - i, x + 40, y - 30 - (i * 4)); //body
+
+        do Screen.drawLine(x + 40, y - 75 - (i * 2), x + 20 + i, y - 60 - (i * 2)); //back arm
+        do Screen.drawLine(x + 30 + i, y - 50 - (i * 3), x + 20 + i, y - 60 - (i * 2)); //back arm
+
+        do Screen.drawLine(x + 40, y - 75 - (i * 2), x + 50 - i, y - 65 - (i * 2)); //front arm
+        do Screen.drawLine(x + 50 - i, y - 65 - (i * 2), x + 70 - i, y - 75 - i); //front arm
+
+        do Screen.drawLine(x + 40, y - 30 - (i * 4), x + (i * 3), y - (i * 4)); // back leg
+        do Screen.drawLine(x + 40, y - 30 - (i * 4), x + 60 - i, y - (i * 4)); //front leg
+        
+        do Screen.setColor(true);
+        do Screen.drawCircle(x + 40, y - 110, 19 - i);
+        return;
+    }
+
+    function void drawCastle(int castleX, int castleY)
+    {
+        //GATE
+        do Screen.setColor(true);
+        do Screen.drawRectangle(castleX + 17, castleY - 15, castleX + 57, castleY + 5);
+        do Screen.drawCircle(castleX + 37, castleY - 15, 20);
+        //BOX
+        do Screen.drawLine(castleX + 5, castleY - 60, castleX + 68, castleY - 60);
+        do Screen.drawLine(castleX + 5, castleY - 60, castleX + 5, castleY - 40);
+        do Screen.drawLine(castleX + 5, castleY - 40, castleX + 68, castleY - 40); 
+        do Screen.drawLine(castleX + 68, castleY - 60, castleX + 68, castleY - 40);
+        // EXIT
+        do Screen.drawLine(castleX + 13, castleY - 57, castleX + 21, castleY - 57);
+        do Screen.drawLine(castleX + 13, castleY - 51, castleX + 21, castleY - 51);
+        do Screen.drawLine(castleX + 13, castleY - 43, castleX + 21, castleY - 43);
+        do Screen.drawLine(castleX + 13, castleY - 57, castleX + 13, castleY - 43);
+        do Screen.drawLine(castleX + 25, castleY - 57, castleX + 35, castleY - 43);
+        do Screen.drawLine(castleX + 35, castleY - 57, castleX + 25, castleY - 43);
+        do Screen.drawLine(castleX + 39, castleY - 57, castleX + 47, castleY - 57);
+        do Screen.drawLine(castleX + 39, castleY - 43, castleX + 47, castleY - 43);
+        do Screen.drawLine(castleX + 43, castleY - 57, castleX + 43, castleY - 43);
+        do Screen.drawLine(castleX + 51, castleY - 57, castleX + 59, castleY - 57);
+        do Screen.drawLine(castleX + 55, castleY - 57, castleX + 55, castleY - 43);
+        return;
+    }
+
+    function void showDoors()
+    {
+        do Screen.setColor(false);
+        do Screen.drawRectangle(0, 0, 511, 255);
+
+        do Screen.setColor(true);
+
+        do End.drawCastle(35, 80);
+        do End.drawCastle(110, 80);
+        do End.drawCastle(185, 80);
+        do End.drawCastle(260, 80);
+        do End.drawCastle(335, 80);
+        do End.drawCastle(410, 80);
+
+        do End.drawCastle(10, 160);
+        do End.drawCastle(80, 160);
+        do End.drawCastle(150, 160);
+        do End.drawCastle(220, 160);
+        do End.drawCastle(290, 160);
+        do End.drawCastle(360, 160);
+        do End.drawCastle(430, 160);
+
+        do End.drawCastle(35, 240);
+        do End.drawCastle(110, 240);
+        do End.drawCastle(185, 240);
+        do End.drawCastle(260, 240);
+        do End.drawCastle(335, 240);
+        do End.drawCastle(410, 240);
+
+        do Screen.drawLine(0, 85, 511, 85);
+        do Screen.drawLine(0, 165, 511, 165);
+        do Screen.drawLine(0, 245, 511, 245);
+        return;
+    }
+}

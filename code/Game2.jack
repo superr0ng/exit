@@ -1,0 +1,240 @@
+//Game2
+class Game2
+{
+    field Player player;
+    field Map2 map2;
+    field int direction;
+    field int arrowX, arrowY;
+    field int catX, catY;
+    field int jumpDir;
+    field int deathCount;
+
+    field boolean fakeGround;
+    field boolean arrow;
+    field boolean cat;
+    field boolean headBlock;
+    field boolean spike;
+
+    constructor Game2 new()
+    {
+        let map2 = Map2.new();
+        let player = Player.new(1 * 16, (12 * 16) + 15);
+        let direction = 0;
+        let arrowX = 4 * 16;
+        let arrowY = (15 * 16) + 15;
+        let catX = 19 * 16;
+        let catY = 1 * 16 + 15;
+        let jumpDir = 1;
+        let deathCount = 0;
+
+        let fakeGround = true;
+        let arrow = false;
+        let cat = false;
+        let headBlock = false;
+        let spike = true;
+
+        do Output.moveCursor(0, 0);
+        do Output.printString("LIFE X ");
+        do Output.printInt(3 - deathCount);
+        return this;
+    }
+    method void restart()
+    {
+        do player.restart(1 * 16, (12 * 16) + 15);
+        do map2.restart();
+        let direction = 0;
+        let arrowX = 4 * 16;
+        let arrowY = (15 * 16) + 15;
+        let catX = 19 * 16;
+        let catY = 1 * 16 + 15;
+        let jumpDir = 1;
+        let deathCount = 0;
+
+        let fakeGround = true;
+        let arrow = false;
+        let cat = false;
+        let headBlock = false;
+        let spike = true;
+
+        do Output.moveCursor(0, 0);
+        do Output.printString("LIFE X ");
+        do Output.printInt(3 - deathCount);
+        return;
+    }
+
+    method void dispose()
+    {
+        do player.dispose();
+        do map2.dispose();
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    method void run() 
+    {
+        var char key;
+        var int jumpCount;
+        var boolean dead;
+        var boolean exit;
+
+        let key = 0;
+        let jumpCount = -64;
+        let dead = false;
+        let exit = false;
+
+        while (~exit)
+        {
+            let key = Keyboard.keyPressed();
+            let direction = 0; //none
+            if (key = 140)
+            {
+                let exit = true;
+            }
+            if((key = 131) & map2.onGround(player.getX(), player.getY())) //jump
+            {
+                let jumpCount = 8;
+            }
+            if(jumpCount > 0)
+            {
+                if(headBlock)
+                {
+                    do map2.Drawblock((((player.getY() - 32) / 16) * 32) + (player.getX() / 16), map2.mapValue((((player.getY() - 32) / 16) * 32) + (player.getX() / 16)));
+                }
+                if(~map2.blockUp( player.getX(), player.getY() ) )
+                {
+                    do player.moveUp(jumpDir);
+                }
+                let jumpCount = jumpCount - 1;                
+            }
+            if(key = 130) //move left
+            {
+                let jumpDir = 2;
+                if(~map2.blockLeft( player.getX(), player.getY() ) )
+                {
+                    do player.moveLeft();
+                }
+            }
+            if(key = 132) // move right
+            {
+                let jumpDir = 1;
+                if(~map2.blockRight( player.getX(), player.getY() ) )
+                {
+                    do player.moveRight();
+                }
+            }
+
+            if((player.getX() > (10 * 16)) & (player.getY() > (11 * 16 + 8)) & fakeGround)//fake ground
+            {
+                do map2.fakeGround();
+                let fakeGround = false;
+            }
+            if((player.getX() > (22 * 16)) & (player.getY() > (13 * 16 + 15)) & ~headBlock) //head block
+            {
+                let headBlock = true;
+                do map2.headBlock();
+            }
+            if((player.getX() > (28 * 16 - 8)) & (player.getX() < (30 * 16 - 8))) //float
+            {
+                let arrow = false;
+                let arrowX = 4 * 16;
+                let arrowY = (15 * 16) + 15;
+                do player.float(jumpDir);
+            }
+            if(~arrow & (player.getX() > ( 4 * 16 - 5)) & (player.getX() < ( 5 * 16 - 5))) //arrow trap
+            {
+                let arrow = true;
+            }
+            if(arrow)
+            {
+                do Screen.setColor(false);
+                do Screen.drawRectangle(arrowX, arrowY - 15, arrowX + 10, arrowY);
+                if((arrowY - 8) > 15)
+                {                    
+                    let arrowY = arrowY - 8;
+                    do map2.drawArrow(arrowX, arrowY);       
+                }                              
+            }
+            if(arrow & (player.getY() > (arrowY - 16)) & (player.getY() < (arrowY + 27)) & (player.getX() > (arrowX - 5)) & (player.getX() < (arrowX + 9)))
+            {
+                let dead = true;
+            }
+            if(~cat & (player.getX() > (19 * 16 - 8)) & (player.getX() < (21 * 16 - 8)) )
+            {
+                let cat = true;
+            }
+            if(cat)
+            {
+                if(catY < (10 * 16 + 15))
+                {
+                    do Screen.setColor(false);
+                    do Screen.drawRectangle(catX, catY - 31, catX + 31, catY);                    
+                    let catY = catY + 8;       
+                }
+                do map2.drawCat(catX, catY);
+            }
+            if(cat & (player.getX() > (catX - 8)) & (player.getX() < (catX + 22)) & (player.getY() < (catY + 16)) & (player.getY() > (catY - 16)))
+            {
+                let dead = true;
+            }
+            if((player.getX() > (12 * 16 + 2)) & (player.getX() < (12 * 16 + 14)) & (player.getY() < (5 * 16))) // spike
+            {
+                let spike = false;
+            }
+            if(~spike) // draw spike
+            {
+                do map2.drawSpike();
+            }
+            if(~map2.onGround(player.getX(), player.getY())) // keep falling until on ground
+            {
+                do player.moveDown(jumpDir);
+            }
+            if(map2.finished(player.getX(), player.getY())) // reach the castle, finished
+            {
+                let exit = true;
+            }
+
+            if(player.getY() > ((15 * 16) + 14)) // if player falls under ground
+            {
+                let dead = true;
+            }
+            if(~spike & (player.getX() > (12 * 16 - 6)) & (player.getY() > (4 * 16)) & (player.getX() < (12 * 16 + 14)) & (player.getY() < (5 * 16)))// if player touches spike
+            {
+                let dead = true;
+            }
+            if((player.getX() > (28 * 16 - 8)) & (player.getX() < (30 * 16 - 8)) & (player.getY() < (4 * 16 + 2))) // touches sunlight
+            {
+                let dead = true;
+            }
+
+            if(dead)
+            {
+                let deathCount = deathCount + 1;
+                let dead = false;
+                do Sys.wait(1000);
+                let direction = 0;
+                let jumpDir = 1;
+                let arrowX = 4 * 16;
+                let arrowY = (15 * 16) + 15;
+                let catX = 19 * 16;
+                let catY = 1 * 16 + 15;
+                
+                let fakeGround = true;
+                let arrow = false;
+                let cat = false;
+                let headBlock = false;
+                let spike = true;
+
+                do map2.restart();
+                do player.restart(1 * 16, (12 * 16) + 15);
+                
+
+                do Output.moveCursor(0, 0);
+                do Output.printString("LIFE X ");
+                do Output.printInt(3 - deathCount);
+
+            }
+            do Sys.wait(15); // Delays the next movement.
+        }
+        return;
+    }
+}
