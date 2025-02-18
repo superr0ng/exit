@@ -14,9 +14,9 @@ This is the final group project of "Introduction to Computer, Fall 2019". This g
 1. Download [Java](https://www.java.com/en/download/).
 2. Download [Nand2tetris Software Suite](https://www.nand2tetris.org/software).
 3. Download this repository to your computer.
-4. Run nand2tetris/tools/VMEmulator.sh (or .bat if you're using Windows).
+4. Run `nand2tetris/tools/VMEmulator.sh` (or `VMEmulator.bat` if you're using Windows).
 5. In the VMEmulator, click "Load Program".
-6. Select the exit/vm/ repository.
+6. Select the `exit/vm/`.
 7. Set "Animate" to "No animation".
 8. Click "Run".
 9. Enjoy the game!
