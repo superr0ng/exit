@@ -4,11 +4,11 @@
 This is the final group project of "Introduction to Computer, Fall 2019". This game was inspired by "Cat Mario", which is a trolling version of Mario. The exit you see may not be real. The invisible traps on the way out may kill you, even the scene may kill you. Can you exit unscratched?
 
 ## Snapshots
-![Starting Scene](https://i.imgur.com/jB0of98.png)
-![Introducing game play](https://i.imgur.com/3Pq5JN7.png)
-![Fall](https://i.imgur.com/yistrXb.png)
-![Level 2](https://i.imgur.com/3ibZCef.png)
-![End Scene](https://i.imgur.com/pyMXElk.png)
+![Starting Scene](img/Start.png)
+![Introducing game play](img/Introduction.png)
+![Tripped](img/tripped.png)
+![Level 2](img/level2.png)
+![End Scene](img/end.png)
 
 ## How to run
 ### Online IDE
