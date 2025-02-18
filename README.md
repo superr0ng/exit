@@ -11,12 +11,21 @@ This is the final group project of "Introduction to Computer, Fall 2019". This g
 ![End Scene](https://i.imgur.com/pyMXElk.png)
 
 ## How to run
+### Online IDE
+You can run the project with the [online IDE](https://nand2tetris.github.io/web-ide/vm).
+
+1. In the "VM Code" panel, click "Load files", "Select local file" and upload `exit/vm/`.
+2. Set "Execution speed" to "Fast" and run.
+3. In the "Screen" panel, enable keyboard. (You can click "x2" to scale up screen size.)
+4. Enjoy the game!
+
+### Desktop Version
 1. Download [Java](https://www.java.com/en/download/).
 2. Download [Nand2tetris Software Suite](https://www.nand2tetris.org/software).
 3. Download this repository to your computer.
 4. Run `nand2tetris/tools/VMEmulator.sh` (or `VMEmulator.bat` if you're using Windows).
 5. In the VMEmulator, click "Load Program".
-6. Select the `exit/vm/`.
+6. Select the `exit/vm/` (You have to load the whole directory!).
 7. Set "Animate" to "No animation".
 8. Click "Run".
 9. Enjoy the game!
